@@ -205,7 +205,7 @@ Self.prototype._get = function (node, port, method) {
 
 Self.prototype._getInfo = function (node, port) {
   node = node || 'public.turtlenode.io'
-  port = port || 11898
+  port = port || 24091
   return new Promise((resolve, reject) => {
     var cache = this._get(node, port, 'getinfo')
     if (cache) {
@@ -230,7 +230,7 @@ Self.prototype._getInfo = function (node, port) {
 
 Self.prototype._getHeight = function (node, port) {
   node = node || 'public.turtlenode.io'
-  port = port || 11898
+  port = port || 24991
   return new Promise((resolve, reject) => {
     var cache = this._get(node, port, 'getheight')
     if (cache) {
@@ -254,7 +254,7 @@ Self.prototype._getHeight = function (node, port) {
 
 Self.prototype._getTransactions = function (node, port) {
   node = node || 'public.turtlenode.io'
-  port = port || 11898
+  port = port || 24091
   return new Promise((resolve, reject) => {
     var cache = this._get(node, port, 'gettransactions')
     if (cache) {
@@ -278,7 +278,7 @@ Self.prototype._getTransactions = function (node, port) {
 
 Self.prototype._getJsonRpc = function (node, port) {
   node = node || 'public.turtlenode.io'
-  port = port || 11898
+  port = port || 24091
   return new Promise((resolve, reject) => {
     var cache = this._get(node, port, 'getjsonrpc')
     if (cache) {
@@ -302,7 +302,7 @@ Self.prototype._getJsonRpc = function (node, port) {
 
 Self.prototype._postJsonRpc = function (content, node, port) {
   node = node || 'public.turtlenode.io'
-  port = port || 11898
+  port = port || 24091
   return new Promise((resolve, reject) => {
     var method = JSON.stringify(content)
     var cache = this._get(node, port, method)
