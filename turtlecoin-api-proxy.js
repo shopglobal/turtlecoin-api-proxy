@@ -16,7 +16,7 @@ function Self (opts) {
   if (!(this instanceof Self)) return new Self(opts)
   this.cacheTimeout = opts.cacheTimeout || 30
   this.bindIp = opts.bindIp || '0.0.0.0'
-  this.bindPort = opts.bindPort || 80
+  this.bindPort = opts.bindPort || 3080
   this.cache = new NodeCache({stdTTL: this.cacheTimeout, checkPeriod: (Math.round(this.cacheTimeout / 2))})
   this.app = express()
   this.app.use(bodyparser.json())
