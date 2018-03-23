@@ -216,7 +216,7 @@ Self.prototype._get = function (node, port, method) {
 
 Self.prototype._getInfo = function (node, port) {
   node = node || 'public.turtlenode.io'
-  port = port || 24091
+  port = port || 11898
   return new Promise((resolve, reject) => {
     var cache = this._get(node, port, 'getinfo')
     if (cache) {
@@ -265,7 +265,7 @@ Self.prototype._getHeight = function (node, port) {
 
 Self.prototype._getTransactions = function (node, port) {
   node = node || 'public.turtlenode.io'
-  port = port || 24091
+  port = port || 11898
   return new Promise((resolve, reject) => {
     var cache = this._get(node, port, 'gettransactions')
     if (cache) {
