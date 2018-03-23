@@ -289,21 +289,23 @@ Self.prototype._getTransactions = function (node, port) {
 
 Self.prototype._printGenesisTx = function (node, port) {
   node = node || 'public.turtlenode.io'
-  port = port || 24091
+  port = port || 11898
   return new Promise((resolve, reject) => {
     var cache = this._get(node, port, 'print-genesis-tx')
     if (cache) {
       cache.cached = true
       return resolve(cache)
     }
-    Request(util.format('http://%s:%s/gettransactions', node, port)).then((data) => {
+    Request(util.format('http://%s:%s/print-genesis-tx', node, port)).then((data) => {
       data = JSON.parse(data)
       data.cached = false
       data.node = {
         host: node,
         port: port
       }
-      this._set(node, port, 'gettransactions', data)
+      this._set(node, port, 'print-genesis-tx', data)
+      var genesisData = data
+      console.log(data)
       return resolve(data)
     }).catch((err) => {
       return resolve({error: err, node: {host: node, port: port}})
