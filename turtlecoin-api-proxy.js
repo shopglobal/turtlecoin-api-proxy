@@ -91,6 +91,15 @@ function Self (opts) {
       return response.status(400).send()
     })
   })
+  
+  this.app.get('/printGenesisTx', (request, response) => {
+    this._printGenesisTx().then((data) => {
+      return response.json(data)
+    }).catch((err) => {
+      this.emit('error', err)
+      return response.status(400).send()
+    })
+  })
 
   this.app.get('/:node/gettransactions', (request, response) => {
     if (!request.params.node) return response.status(400).send()
@@ -257,6 +266,30 @@ Self.prototype._getTransactions = function (node, port) {
   port = port || 24091
   return new Promise((resolve, reject) => {
     var cache = this._get(node, port, 'gettransactions')
+    if (cache) {
+      cache.cached = true
+      return resolve(cache)
+    }
+    Request(util.format('http://%s:%s/gettransactions', node, port)).then((data) => {
+      data = JSON.parse(data)
+      data.cached = false
+      data.node = {
+        host: node,
+        port: port
+      }
+      this._set(node, port, 'gettransactions', data)
+      return resolve(data)
+    }).catch((err) => {
+      return resolve({error: err, node: {host: node, port: port}})
+    })
+  })
+}
+
+Self.prototype._printGenesisTx = function (node, port) {
+  node = node || 'public.turtlenode.io'
+  port = port || 24091
+  return new Promise((resolve, reject) => {
+    var cache = this._get(node, port, 'print-genesis-tx')
     if (cache) {
       cache.cached = true
       return resolve(cache)
