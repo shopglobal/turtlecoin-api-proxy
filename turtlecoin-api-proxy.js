@@ -94,6 +94,8 @@ function Self (opts) {
   
   this.app.get('/printGenesisTx', (request, response) => {
     this._printGenesisTx().then((data) => {
+      var genesis = data;
+      console.log(genesis)
       return response.json(data)
     }).catch((err) => {
       this.emit('error', err)
